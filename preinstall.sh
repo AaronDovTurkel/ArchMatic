@@ -9,7 +9,6 @@
 
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib
-pacman -Syyy
 
 
 echo "-------------------------------------------------"
@@ -36,11 +35,6 @@ sgdisk -t 1:ef00 ${DISK}
 sgdisk -t 2:8300 ${DISK}
 sgdisk -t 3:8300 ${DISK}
 
-# label partitions
-sgdisk -c 1:"UEFISYS" ${DISK}
-sgdisk -c 2:"ROOT" ${DISK}
-sgdisk -c 3:"HOME" ${DISK}
-
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
 
@@ -52,7 +46,7 @@ mkfx.ext4 "${DISK}p3"
 mkdir /mnt
 mount "${DISK}p2" /mnt
 mkdir /mnt/home
-mount "{DISK}p3}" /mnt/home
+mount "${DISK}p3" /mnt/home
 
 mkdir /mnt/etc
 genfstab -U -p /mnt >> /mnt/etc/fstab
