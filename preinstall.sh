@@ -53,7 +53,7 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 pacstrap -i /mnt base
-arch-chroot /mnt
+arch-chroot /mnt /bin/bash <<"EOT"
 
 pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 
@@ -117,7 +117,8 @@ cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 cat /etc/fstab
 
-exit
+echo $$
+EOT
 
 umount -a
 
