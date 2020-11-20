@@ -45,9 +45,8 @@ cat /mnt/etc/fstab
 pacstrap -i /mnt base
 
 arch-chroot /mnt <<"EOT"
-pacman -S git
+pacman -S git sudo --noconfirm
 git clone https://github.com/aarondovturkel/archmatic
-pacman -S sudo
 chmod +x ./archmatic/0b-preinstall-chroot.sh
 echo $$
 EOT
