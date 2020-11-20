@@ -30,7 +30,7 @@ echo -e "\nCreating Filesystems...\n$HR"
 
 mkfs.fat -F32 "${DISK}p1"
 mkfs.ext4 "${DISK}p2"
-mkfx.ext4 "${DISK}p3"
+mkfs.ext4 "${DISK}p3"
 
 # mount target
 mkdir /mnt
