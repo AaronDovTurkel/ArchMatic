@@ -21,19 +21,25 @@ echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
 
-# disk prep
-sgdisk -Z ${DISK} # zap all on disk
-sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
-
-# create partitions
-sgdisk -n 1:0:+500M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
-sgdisk -n 2:0:+30G  ${DISK} # partition 2 (Root), default start, remaining
-sgdisk -n 3:0:0     ${DISK} # partition 3 (Home)
-
-# set partition types
-sgdisk -t 1:ef00 ${DISK}
-sgdisk -t 2:8300 ${DISK}
-sgdisk -t 3:8300 ${DISK}
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISK}
+  o # clear the in memory partition table
+  n # new partition
+    # partition number 1
+    # default - start at beginning of disk 
+  +500M # 100 MB boot parttion
+  t
+  1
+  n # new partition
+    # partion number 2
+    # default, start immediately after preceding partition
+  +30G  # default, extend partition to end of disk
+  n # make a partition bootable
+    # bootable partition is partition 1 -- /dev/sda1
+    #
+    # print the in-memory partition table
+  w # write the partition table
+  q # and we're done
+EOF
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
