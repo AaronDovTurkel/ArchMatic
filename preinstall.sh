@@ -12,10 +12,6 @@ pacman -S --noconfirm pacman-contrib
 pacman -Syyy
 
 
-
-echo -e "\nInstalling prereqs...\n$HR"
-pacman -S --noconfirm gptfdisk btrfs-progs
-
 echo "-------------------------------------------------"
 echo "-------select your disk to format----------------"
 echo "-------------------------------------------------"
@@ -48,9 +44,9 @@ sgdisk -c 3:"HOME" ${DISK}
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
 
-mkfs.vfat -F32 -n "UEFISYS" "${DISK}p1"
-mkfs.ext4 -L "ROOT" "${DISK}p2"
-mkfx.ext4 -L "HOME" "${DISK}p3"
+mkfs.fat -F32 "${DISK}p1"
+mkfs.ext4 "${DISK}p2"
+mkfx.ext4 "${DISK}p3"
 
 # mount target
 mkdir /mnt
