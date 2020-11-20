@@ -23,6 +23,8 @@ echo "--------------------------------------"
 
 fdisk ${DISK}
 
+lsblk
+
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
 
