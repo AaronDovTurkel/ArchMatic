@@ -7,13 +7,9 @@
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
 
-echo "-------------------------------------------------"
-echo "Setting up mirrors for optimal download - US Only"
-echo "-------------------------------------------------"
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib
-mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+pacman -Syyy
 
 
 
@@ -35,63 +31,104 @@ sgdisk -Z ${DISK} # zap all on disk
 sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
-sgdisk -n 1:0:+1000M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
-sgdisk -n 2:0:0     ${DISK} # partition 2 (Root), default start, remaining
+sgdisk -n 1:0:+500M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
+sgdisk -n 2:0:+30G  ${DISK} # partition 2 (Root), default start, remaining
+sgdisk -n 3:0:0     ${DISK} # partition 3 (Home)
 
 # set partition types
 sgdisk -t 1:ef00 ${DISK}
 sgdisk -t 2:8300 ${DISK}
+sgdisk -t 3:8300 ${DISK}
 
 # label partitions
 sgdisk -c 1:"UEFISYS" ${DISK}
 sgdisk -c 2:"ROOT" ${DISK}
+sgdisk -c 3:"HOME" ${DISK}
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
 
-mkfs.vfat -F32 -n "UEFISYS" "${DISK}1"
-mkfs.ext4 -L "ROOT" "${DISK}2"
+mkfs.vfat -F32 -n "UEFISYS" "${DISK}p1"
+mkfs.ext4 -L "ROOT" "${DISK}p2"
+mkfx.ext4 -L "HOME" "${DISK}p3"
 
 # mount target
 mkdir /mnt
-mount -t ext4 "${DISK}2" /mnt
-mkdir /mnt/boot
-mkdir /mnt/boot/efi
-mount -t vfat "${DISK}1" /mnt/boot/
+mount "${DISK}p2" /mnt
+mkdir /mnt/home
+mount "{DISK}p3}" /mnt/home
 
-echo "--------------------------------------"
-echo "-- Arch Install on Main Drive       --"
-echo "--------------------------------------"
-pacstrap /mnt base base-devel linux linux-firmware vim nano sudo --noconfirm --needed
-genfstab -U /mnt >> /mnt/etc/fstab
+mkdir /mnt/etc
+genfstab -U -p /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+
+pacstrap -i /mnt base
 arch-chroot /mnt
 
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
-bootctl install
-cat <<EOF > /boot/loader/entries/arch.conf
-title Arch Linux  
-linux /vmlinuz-linux  
-initrd  /initramfs-linux.img  
-options root=${DISK}1 rw
-EOF
+pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 
-echo "--------------------------------------"
-echo "--          Network Setup           --"
-echo "--------------------------------------"
-pacman -S networkmanager dhclient --noconfirm --needed
-systemctl enable --now NetworkManager
+echo -e "\nInstalling Base System\n"
 
-echo "--------------------------------------"
-echo "--      Set Password for Root       --"
-echo "--------------------------------------"
-echo "Enter password for root user: "
-passwd root
+PKGS=(
+  'nano'
+  'vim'
+  'base-devel'
+  'openssh'
+  'networkmanager'
+  'wpa_supplicant'
+  'wireless_tools'
+  'netctl'
+  'dialog'
+  'sudo'
+  'grub'
+  'efibootmgr'
+  'dosfstools'
+  'os-prober'
+  'mtools'
+  'intel-ucode'
+  'xorg-server'
+  'mesa'
+  'xf86-video-intel'
+)
+for PKG in "${PKGS[@]}"; do
+    echo "INSTALLING: ${PKG}"
+    sudo pacman -S "$PKG" --noconfirm --needed
+done
+echo -e "\nDone!\n"
+
+systemctl enable sshd
+systemctl enable NetworkManager
+
+mkinitcpio -p linux
+mkinitcpio -p linux-lts
+
+sed -i "/en_US.UTF-8/s/^#//g" /etc/locale.gen
+locale-gen
+
+passwd
+useradd -m -g users -G wheel adt
+passwd adt
+
+sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
+
+mkdir -p /boot/EFI
+mount /dev/nvme0n1p1 /boot/EFI
+
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
+mkdir /boot/grub/locale
+cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+grub-mkconfig -o /boot/grub/grub.cfg
+
+fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+
+cp /etc/fstab /etc/fstab.bak
+echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
+cat /etc/fstab
 
 exit
-umount -R /mnt
 
-echo "--------------------------------------"
-echo "--   SYSTEM READY FOR FIRST BOOT    --"
-echo "--------------------------------------"
+umount -a
+
+echo 'Ready to reboot!'
