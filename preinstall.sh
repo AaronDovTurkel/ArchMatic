@@ -53,7 +53,7 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 pacstrap -i /mnt base
-arch-chroot /mnt /bin/bash <<"EOT"
+arch-chroot /mnt <<"EOT"
 
 pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 
