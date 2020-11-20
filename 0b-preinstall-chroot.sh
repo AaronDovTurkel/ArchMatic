@@ -58,4 +58,4 @@ cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 cat /etc/fstab
 
-exit
+echo "exit chroot by running 'exit' now"
