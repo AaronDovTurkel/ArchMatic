@@ -58,32 +58,7 @@ arch-chroot /mnt <<"EOT"
 pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 
 echo -e "\nInstalling Base System\n"
-
-PKGS=(
-  'nano'
-  'vim'
-  'base-devel'
-  'openssh'
-  'networkmanager'
-  'wpa_supplicant'
-  'wireless_tools'
-  'netctl'
-  'dialog'
-  'sudo'
-  'grub'
-  'efibootmgr'
-  'dosfstools'
-  'os-prober'
-  'mtools'
-  'intel-ucode'
-  'xorg-server'
-  'mesa'
-  'xf86-video-intel'
-)
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
+sudo pacman -S nano vim base-devel openssh networkmanager wpa_supplicant wireless_tools netctl dialog sudo grub efibootmgr dosfstools os-prober mtools intel-ucode xorg-server mesa xf86-video-intel --noconfirm --needed
 echo -e "\nDone!\n"
 
 systemctl enable sshd
