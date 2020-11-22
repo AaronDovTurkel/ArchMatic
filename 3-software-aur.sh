@@ -9,28 +9,22 @@
 
 echo -e "\nINSTALLING AUR SOFTWARE\n"
 
-cd "${HOME}"
+cd /opt
 
-echo "CLOING: YAY"
+echo "CLONING: YAY"
 git clone "https://aur.archlinux.org/yay.git"
-
+sudo chown adt:users ./yay
 
 PKGS=(
 
     # UTILITIES -----------------------------------------------------------
 
     'i3lock-fancy'              # Screen locker
-    'synology-drive'            # Synology Drive
-    'freeoffice'                # Office Alternative
     
     # MEDIA ---------------------------------------------------------------
 
     'screenkey'                 # Screencast your keypresses
     'lbry-app-bin'              # LBRY Linux Application
-
-    # COMMUNICATIONS ------------------------------------------------------
-
-    'brave-nightly-bin'         # Brave
     
 
     # THEMES --------------------------------------------------------------
@@ -42,7 +36,7 @@ PKGS=(
 )
 
 
-cd ${HOME}/yay
+cd yay
 makepkg -si
 
 for PKG in "${PKGS[@]}"; do
