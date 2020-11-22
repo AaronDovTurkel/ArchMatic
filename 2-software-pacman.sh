@@ -73,6 +73,11 @@ PKGS=(
     'npm'                   # Node package manager
     'python'                # Scripting language
     'yarn'                  # Dependency management (Hyper needs this)
+    'clang'                 # C Lang compiler
+    'cmake'                 # Cross-platform open-source make system
+    'code'                  # Visual Studio Code
+    'gcc'                   # C/C++ compiler
+    'glibc'                 # C libraries
 
     # MEDIA ---------------------------------------------------------------
 
