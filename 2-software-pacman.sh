@@ -11,14 +11,9 @@ echo -e "\nINSTALLING SOFTWARE\n"
 
 PKGS=(
 
-    # SYSTEM --------------------------------------------------------------
-
-    'linux-lts'             # Long term support kernel
-
     # TERMINAL UTILITIES --------------------------------------------------
 
     'bash-completion'       # Tab completion for Bash
-    'bleachbit'             # File deletion utility
     'cronie'                # cron jobs
     'curl'                  # Remote content retrieval
     'file-roller'           # Archive utility
@@ -31,7 +26,6 @@ PKGS=(
     'numlockx'              # Turns on numlock in X11
     'openssh'               # SSH connectivity tools
     'p7zip'                 # 7z compression program
-    'rsync'                 # Remote file sync utility
     'speedtest-cli'         # Internet speed via terminal
     'terminus-font'         # Font package with some bigger fonts for login terminal
     'tlp'                   # Advanced laptop power management
@@ -47,11 +41,7 @@ PKGS=(
 
     # DISK UTILITIES ------------------------------------------------------
 
-    'android-tools'         # ADB for Android
-    'android-file-transfer' # Android File Transfer
     'autofs'                # Auto-mounter
-    'btrfs-progs'           # BTRFS Support
-    'dosfstools'            # DOS Support
     'exfat-utils'           # Mount exFat drives
     'gparted'               # Disk utility
     'gvfs-mtp'              # Read MTP Connected Systems
@@ -75,15 +65,9 @@ PKGS=(
     'variety'               # Wallpaper changer
 
     # DEVELOPMENT ---------------------------------------------------------
-
-    'gedit'                 # Text editor
-    'clang'                 # C Lang compiler
-    'cmake'                 # Cross-platform open-source make system
+    
     'code'                  # Visual Studio Code
     'electron'              # Cross-platform development using Javascript
-    'git'                   # Version control system
-    'gcc'                   # C/C++ compiler
-    'glibc'                 # C libraries
     'meld'                  # File/directory comparison
     'nodejs'                # Javascript runtime environment
     'npm'                   # Node package manager
@@ -95,6 +79,7 @@ PKGS=(
     'kdenlive'              # Movie Render
     'obs-studio'            # Record your screen
     'celluloid'             # Video player
+    'vlc'                   # Video player
     
     # GRAPHICS AND DESIGN -------------------------------------------------
 
@@ -105,8 +90,10 @@ PKGS=(
     # PRODUCTIVITY --------------------------------------------------------
 
     'hunspell'              # Spellcheck libraries
+    'aspell'
     'hunspell-en'           # English spellcheck library
     'xpdf'                  # PDF viewer
+    'chromium'
 
 )
 
