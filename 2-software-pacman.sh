@@ -92,6 +92,7 @@ PKGS=(
     'gimp'                  # GNU Image Manipulation Program
     'ristretto'             # Multi image viewer
     'bspwm'                 # Window manager
+    'sxhkd'                 # Macro controller
 
     # PRODUCTIVITY --------------------------------------------------------
 
