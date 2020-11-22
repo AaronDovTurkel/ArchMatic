@@ -12,22 +12,18 @@ echo -e "\nInstalling Base System\n"
 PKGS=(
 
     # --- XORG Display Rendering
-        'xorg'                  # Base Package
-        'xorg-drivers'          # Display Drivers 
-        'xterm'                 # Terminal for TTY
+        'xorg-drivers'          # Display Drivers
         'xorg-server'           # XOrg server
         'xorg-apps'             # XOrg apps group
         'xorg-xinit'            # XOrg init
         'xorg-xinput'           # Xorg xinput
-        'mesa'                  # Open source version of OpenGL
 
     # --- Setup Desktop
-        'awesome'               # Awesome Desktop
         'xfce4-power-manager'   # Power Manager 
         'rofi'                  # Menu System
         'picom'                 # Translucent Windows
         'xclip'                 # System Clipboard
-        'gnome-polkit'          # Elevate Applications
+        'xfce4-polkit'          # Elevate Applications
         'lxappearance'          # Set System Themes
 
     # --- Login Display Manager
@@ -35,8 +31,6 @@ PKGS=(
         'lightdm-webkit2-greeter'   # Framework for Awesome Login Themes
 
     # --- Networking Setup
-        'wpa_supplicant'            # Key negotiation for WPA wireless networks
-        'dialog'                    # Enables shell scripts to trigger dialog boxex
         'openvpn'                   # Open VPN support
         'networkmanager-openvpn'    # Open VPN plugin for NM
         'network-manager-applet'    # System tray icon/utility for network connectivity
