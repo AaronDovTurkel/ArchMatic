@@ -67,6 +67,13 @@ sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightd
 
 # ------------------------------------------------------------------------
 
+echo -e "\nSetting up BSPWM with defualt config"
+
+install -Dm755 /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+install -Dm644 /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
+
+# ------------------------------------------------------------------------
+
 echo -e "\nEnabling bluetooth daemon and setting it to auto-start"
 
 sudo sed -i 's|#AutoEnable=false|AutoEnable=true|g' /etc/bluetooth/main.conf
