@@ -86,6 +86,7 @@ PKGS=(
     'gcolor2'               # Colorpicker
     'gimp'                  # GNU Image Manipulation Program
     'ristretto'             # Multi image viewer
+    'bspwm'                 # Window manager
 
     # PRODUCTIVITY --------------------------------------------------------
 
