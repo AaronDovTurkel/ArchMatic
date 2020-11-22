@@ -44,20 +44,10 @@ EOF
 
 # ------------------------------------------------------------------------
 
-echo -e "\nUpdating /bin/startx to use the correct path"
-
-# By default, startx incorrectly looks for the .serverauth file in our HOME folder.
-sudo sed -i 's|xserverauthfile=\$HOME/.serverauth.\$\$|xserverauthfile=\$XAUTHORITY|g' /bin/startx
-
-# ------------------------------------------------------------------------
-
 echo -e "\nConfiguring LTS Kernel as a secondary boot option"
 
-sudo cp /boot/loader/entries/arch.conf /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|Arch Linux|Arch Linux LTS Kernel|g' /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|vmlinuz-linux|vmlinuz-linux-lts|g' /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|initramfs-linux.img|initramfs-linux-lts.img|g' /boot/loader/entries/arch-lts.conf
-
+sed '/GRUB_DEFAULT=/s/0/saved/' /etc/default/grub
+sed -i "/GRUB_SAVEDEFAULT=/s/^#//g" /etc/locale.gen
 # ------------------------------------------------------------------------
 
 echo -e "\nConfiguring vconsole.conf to set a larger font for login shell"
@@ -69,34 +59,11 @@ EOF
 
 # ------------------------------------------------------------------------
 
-echo -e "\nDisabling buggy cursor inheritance"
-
-# When you boot with multiple monitors the cursor can look huge. This fixes it.
-sudo cat <<EOF > /usr/share/icons/default/index.theme
-[Icon Theme]
-#Inherits=Theme
-EOF
-
-# ------------------------------------------------------------------------
-
-echo -e "\nIncreasing file watcher count"
-
-# This prevents a "too many files" error in Visual Studio Code
-echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf && sudo sysctl --system
-
-# ------------------------------------------------------------------------
-
-echo -e "\nDisabling Pulse .esd_auth module"
-
-# Pulse audio loads the `esound-protocol` module, which best I can tell is rarely needed.
-# That module creates a file called `.esd_auth` in the home directory which I'd prefer to not be there. So...
-sudo sed -i 's|load-module module-esound-protocol-unix|#load-module module-esound-protocol-unix|g' /etc/pulse/default.pa
-
-# ------------------------------------------------------------------------
-
 echo -e "\nEnabling Login Display Manager"
 
 sudo systemctl enable --now lightdm.service
+sed -i "/greeter-session=/s/^#//g" /etc/lightdm/lightdm.conf
+sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightdm/lightdm.conf
 
 # ------------------------------------------------------------------------
 
@@ -115,15 +82,8 @@ sudo systemctl enable --now ntpd.service
 sudo systemctl disable dhcpcd.service
 sudo systemctl stop dhcpcd.service
 sudo systemctl enable --now NetworkManager.service
-echo "
-###############################################################################
-# Cleaning
-###############################################################################
-"
-# Remove no password sudo rights
-sed -i 's/^%wheel ALL=(ALL) NOPASSWD: ALL/# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
-# Add sudo rights
-sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+echo "###############################################################################"
+
 
 # Clean orphans pkg
 if [[ ! -n $(pacman -Qdt) ]]; then
@@ -134,8 +94,4 @@ fi
 
 # Replace in the same state
 cd $pwd
-echo "
-###############################################################################
-# Done
-###############################################################################
-"
+
