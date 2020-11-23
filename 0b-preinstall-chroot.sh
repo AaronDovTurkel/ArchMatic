@@ -7,13 +7,6 @@
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
 
-nc=$(grep -c ^processor /proc/cpuinfo)
-echo "You have " $nc" cores."
-echo "-------------------------------------------------"
-echo "Changing the makeflags for "$nc" cores."
-sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$nc"/g' /etc/makepkg.conf
-echo "Changing the compression settings for "$nc" cores."
-sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T $nc -z -)/g' /etc/makepkg.conf
 
 pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 echo -e "\nInstalling Base System\n"
