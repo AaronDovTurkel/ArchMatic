@@ -21,8 +21,6 @@ echo "--------------------------------------"
 echo -e "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
 
-fdisk ${DISK}
-
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISK}
   o # clear the in memory partition table
   n # new partition
@@ -47,6 +45,8 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISK}
 EOF
 
 lsblk
+
+fdisk ${DISK} p
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n$HR"
