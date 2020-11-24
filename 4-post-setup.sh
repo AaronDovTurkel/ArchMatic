@@ -28,16 +28,7 @@ xset s off
 xsetroot -solid darkgrey
 
 # Merge resources (optional)
-#xrdb -merge $HOME/.Xresources
-
-# Caps to Ctrl, no caps
-setxkbmap -layout us -option ctrl:nocaps
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "\$f" ] && . "\$f"
-    done
-    unset f
-fi
+xrdb -merge $HOME/.Xresources
 
 exec bspwm
 EOF
@@ -47,7 +38,7 @@ EOF
 echo -e "\nConfiguring LTS Kernel as a secondary boot option"
 
 sed '/GRUB_DEFAULT=/s/0/saved/' /etc/default/grub
-sed -i "/GRUB_SAVEDEFAULT=/s/^#//g" /etc/locale.gen
+sed -i "/GRUB_SAVEDEFAULT=/s/^#//g" /etc/default/grub
 # ------------------------------------------------------------------------
 
 echo -e "\nConfiguring vconsole.conf to set a larger font for login shell"
@@ -69,8 +60,12 @@ sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightd
 
 echo -e "\nSetting up BSPWM with defualt config"
 
-install -Dm755 /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
-install -Dm644 /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
+mkdir ~/.config
+mkdir ~/.config/bspwmrc
+mkdir ~/.config/sxhkd
+
+cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 # ------------------------------------------------------------------------
 
