@@ -38,6 +38,7 @@ PKGS=(
     'zip'                   # Zip compression program
     'zsh'                   # ZSH shell
     'zsh-completions'       # Tab completion for ZSH
+    'zathura'               # pdf viewer
 
     # DISK UTILITIES ------------------------------------------------------
 
@@ -93,6 +94,7 @@ PKGS=(
     'ristretto'             # Multi image viewer
     'bspwm'                 # Window manager
     'sxhkd'                 # Macro controller
+    'picom'
 
     # PRODUCTIVITY --------------------------------------------------------
 
