@@ -52,17 +52,15 @@ I also install the LTS Kernel along side the rolling one, and configure my bootl
 
 __[Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/installation_guide)__
 
-#### No Wifi - preinstall
+#### No Wifi - preinstall <a id="1">[1]</a>
 
-<a id="1">[1]</a>
 ```markdown
 iwctl`
 station *device* connect *SSID*
 ```
 
-#### No Wifi - first boot
+#### No Wifi - first boot <a id="2">[2]</a>
 
-<a id="2">[2]</a>
 ```markdown
 nmcli device wifi connect *SSID* password *PASSWORD*
 ```
