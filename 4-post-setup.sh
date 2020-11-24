@@ -73,7 +73,7 @@ EOF
 
 echo -e "\nEnabling Login Display Manager"
 
-sudo systemctl enable --now lightdm.service
+sudo systemctl enable lightdm.service
 sed -i "/greeter-session=/s/^#//g" /etc/lightdm/lightdm.conf
 sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightdm/lightdm.conf
 
@@ -88,7 +88,7 @@ mkdir ~/.config/sxhkd
 cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
 cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
-sed -i -e 's/urxvt/kitty/g' ~/.config/bspwm/bspwmrc
+sed -i 's/urxvt/kitty/g' ~/.config/bspwm/bspwmrc
 
 # ------------------------------------------------------------------------
 
