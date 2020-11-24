@@ -43,6 +43,9 @@ PKGS=(
     'conky'
     'ttf-font-awesome'
     'rxvt-unicode'
+    'kitty'
+    'st'
+    'alacritty'
 
     # DISK UTILITIES ------------------------------------------------------
 
