@@ -5,8 +5,21 @@
 #    / _ \| '_/ _| ' \| |\/| / _` |  _| / _|
 #   /_/ \_\_| \__|_||_|_|  |_\__,_|\__|_\__|
 #  Arch Linux Post Install Setup and Config
-#-------------------------------------------------------------------------
+#-----------------------------------------------------------------------
 
+read -p "Please enter hostname:" hostname
+
+read -p "Please enter username:" username
+
+read -sp "Please enter password:" password
+
+read -sp "Please repeat password:" password2
+
+# Check both passwords match
+if [ "$password" != "$password2" ]; then
+    echo "Passwords do not match"
+    exit 1
+fi
 
 pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 echo -e "\nInstalling Base System\n"
