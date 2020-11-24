@@ -42,6 +42,7 @@ PKGS=(
     'dmenu'
     'conky'
     'ttf-font-awesome'
+    'rxvt-unicode'
 
     # DISK UTILITIES ------------------------------------------------------
 
@@ -87,7 +88,6 @@ PKGS=(
 
     'kdenlive'              # Movie Render
     'obs-studio'            # Record your screen
-    'celluloid'             # Video player
     'vlc'                   # Video player
     
     # GRAPHICS AND DESIGN -------------------------------------------------
@@ -106,6 +106,7 @@ PKGS=(
     'hunspell-en'           # English spellcheck library
     'xpdf'                  # PDF viewer
     'chromium'
+    'firefox'
 
 )
 
