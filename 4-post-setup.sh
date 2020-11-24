@@ -11,7 +11,7 @@ echo -e "\nFINAL SETUP AND CONFIGURATION"
 
 # ------------------------------------------------------------------------
 
-echo -e "\nGenaerating .xinitrc file"
+echo -e "\nGenaerating .Xresources file"
 
 # Generate the .xinitrc file so we can launch Awesome from the
 # terminal using the "startx" command
@@ -79,6 +79,15 @@ sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightd
 
 # ------------------------------------------------------------------------
 
+echo -e "\nSetting up default folders"
+
+mkdir ~/images
+mkdir ~/images/wallpapers
+mkdir ~/images/screenshots
+mkdir ~/community-dots
+
+# ------------------------------------------------------------------------
+
 echo -e "\nSetting up BSPWM with defualt config"
 
 mkdir ~/.config
@@ -101,12 +110,11 @@ sudo systemctl enable --now bluetooth.service
 
 echo -e "\nEnabling the cups service daemon so we can print"
 
-systemctl enable --now org.cups.cupsd.service
+sudo systemctl enable org.cups.cupsd.service
 sudo ntpd -qg
-sudo systemctl enable --now ntpd.service
+sudo systemctl enable ntpd.service
 sudo systemctl disable dhcpcd.service
-sudo systemctl stop dhcpcd.service
-sudo systemctl enable --now NetworkManager.service
+sudo systemctl enable NetworkManager.service
 echo "###############################################################################"
 
 
