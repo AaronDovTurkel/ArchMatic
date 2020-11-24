@@ -34,6 +34,7 @@ cd archmatic
 ./2-software-pacman.sh
 ./3-software-aur.sh
 ./4-post-setup.sh
+reboot
 ```
 
 ### Don't just run these scripts. Examine them. Customize them. Create your own versions.
@@ -56,11 +57,4 @@ __[Arch Linux Installation Gude](https://github.com/rickellis/Arch-Linux-Install
 ```bash
 iwctl`
 station *device* connect *SSID*
-```
-
-#### Initialize Xorg:
-At the terminal, run:
-
-```bash
-xinit
 ```
