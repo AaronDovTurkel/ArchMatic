@@ -10,7 +10,7 @@ First, setup the boot USB, boot arch live iso, and connect to wifi with `iwct`.
 
 ### Arch Live ISO (Pre-Install)
 
-This step installs arch to your hard drive. *IT WILL FORMAT THE DISK*
+This step installs arch to your hard drive. *IT WILL FORMAT THE DISK*.
 After connecting to the internet run `pacman -Syyy`.
 If no erros occur you are connected to the internet and you can continue.
 
@@ -52,9 +52,15 @@ I also install the LTS Kernel along side the rolling one, and configure my bootl
 
 __[Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/installation_guide)__
 
-#### No Wifi
+#### No Wifi - preinstall
 
 ```bash
 iwctl`
 station *device* connect *SSID*
+```
+
+#### No Wifi - first boot
+
+```bash
+nmcli device wifi connect *SSID* password *PASSWORD*
 ```
