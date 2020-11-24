@@ -6,7 +6,7 @@ This README contains the steps I do to install and configure a fully-functional 
 
 ## Setup Boot and Arch ISO on USB key
 
-First, setup the boot USB, boot arch live iso, and connect to wifi with `iwct`. 
+First, setup the boot USB, boot arch live iso, and connect to wifi with `iwctl`[[1]](#1). 
 
 ### Arch Live ISO (Pre-Install)
 
@@ -22,7 +22,7 @@ reboot
 
 ### Arch Linux First Boot
 
-Connect to the internet with `nmcli`.
+Connect to the internet with `nmcli`[[2]](#2).
 
 ```bash
 pacman -S --no-confirm pacman-contrib curl git
@@ -54,13 +54,15 @@ __[Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/installat
 
 #### No Wifi - preinstall
 
-```bash
+<a id="1">[1]</a>
+```markdown
 iwctl`
 station *device* connect *SSID*
 ```
 
 #### No Wifi - first boot
 
-```bash
+<a id="2">[2]</a>
+```markdown
 nmcli device wifi connect *SSID* password *PASSWORD*
 ```
