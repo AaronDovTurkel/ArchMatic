@@ -9,10 +9,10 @@
 
 echo -e "\nINSTALLING AUR SOFTWARE\n"
 
-cd /opt
+sudo cd /opt
 
 echo "CLONING: YAY"
-git clone "https://aur.archlinux.org/yay.git"
+sudo git clone "https://aur.archlinux.org/yay.git"
 sudo chown adt:users ./yay
 
 PKGS=(
@@ -25,7 +25,7 @@ PKGS=(
 
     'screenkey'                 # Screencast your keypresses
     'lbry-app-bin'              # LBRY Linux Application
-    'browsh-bin'                    # Terminal based browser
+    'browsh-bin'                # Terminal based browser
     
 
     # THEMES --------------------------------------------------------------
@@ -34,6 +34,8 @@ PKGS=(
     'materia-gtk-theme'             # Desktop Theme
     'papirus-icon-theme'            # Desktop Icons
     'capitaine-cursors'             # Cursor Themes
+    'nerd-fonts-complete'
+    'polybar'
 )
 
 
