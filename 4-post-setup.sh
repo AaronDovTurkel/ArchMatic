@@ -62,7 +62,7 @@ sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightd
 echo -e "\nSetting up BSPWM with defualt config"
 
 mkdir ~/.config
-mkdir ~/.config/bspwmrc
+mkdir ~/.config/bspwm
 mkdir ~/.config/sxhkd
 
 cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
