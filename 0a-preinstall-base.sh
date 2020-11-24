@@ -23,6 +23,29 @@ echo "--------------------------------------"
 
 fdisk ${DISK}
 
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISK}
+  o # clear the in memory partition table
+  n # new partition
+  p # primary partition
+  1 # partition number 1
+    # default - start at beginning of disk 
+  +500M # 100 MB boot parttion
+  t
+  1
+  n # new partition
+  p # primary partition
+  2 # partion number 2
+    # default, start immediately after preceding partition
+  +30G
+  n
+  p
+  3
+  
+    # default, extend partition to end of disk
+  w # write the partition table
+  q # and we're done
+EOF
+
 lsblk
 
 # make filesystems
