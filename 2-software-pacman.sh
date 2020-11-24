@@ -39,6 +39,9 @@ PKGS=(
     'zsh'                   # ZSH shell
     'zsh-completions'       # Tab completion for ZSH
     'zathura'               # pdf viewer
+    'dmenu'
+    'conky'
+    'ttf-font-awesome'
 
     # DISK UTILITIES ------------------------------------------------------
 
