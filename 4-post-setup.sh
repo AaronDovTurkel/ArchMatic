@@ -15,6 +15,26 @@ echo -e "\nGenaerating .xinitrc file"
 
 # Generate the .xinitrc file so we can launch Awesome from the
 # terminal using the "startx" command
+cat <<EOF > ${HOME}/.Xresources
+#!/bin/bash
+
+Xft.dpi: 192
+
+! These might also be useful depending on your monitor and personal preference:
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+EOF
+
+# ------------------------------------------------------------------------
+
+echo -e "\nGenaerating .xinitrc file"
+
+# Generate the .xinitrc file so we can launch Awesome from the
+# terminal using the "startx" command
 cat <<EOF > ${HOME}/.xinitrc
 #!/bin/bash
 # Disable bell
