@@ -30,6 +30,7 @@ xsetroot -solid darkgrey
 # Merge resources (optional)
 xrdb -merge $HOME/.Xresources
 
+sxhkd & 
 exec bspwm
 EOF
 
