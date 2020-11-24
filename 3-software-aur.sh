@@ -14,17 +14,19 @@ sudo cd /opt
 echo "CLONING: YAY"
 sudo git clone "https://aur.archlinux.org/yay.git"
 sudo chown adt:users ./yay
+cd yay
+makepkg -si --noconfirm --needed
 
 PKGS=(
 
     # UTILITIES -----------------------------------------------------------
 
+    'i3lock'                    # Screen locker
     'i3lock-fancy'              # Screen locker
     
     # MEDIA ---------------------------------------------------------------
 
     'screenkey'                 # Screencast your keypresses
-    'lbry-app-bin'              # LBRY Linux Application
     'browsh-bin'                # Terminal based browser
     
 
@@ -38,12 +40,8 @@ PKGS=(
     'polybar'
 )
 
-
-cd yay
-makepkg -si
-
 for PKG in "${PKGS[@]}"; do
-    yay -S --noconfirm $PKG
+    yay -S $PKG --noconfirm --needed
 done
 
 echo -e "\nDone!\n"
