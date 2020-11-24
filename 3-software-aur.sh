@@ -25,6 +25,7 @@ PKGS=(
 
     'screenkey'                 # Screencast your keypresses
     'lbry-app-bin'              # LBRY Linux Application
+    'browsh-bin'                    # Terminal based browser
     
 
     # THEMES --------------------------------------------------------------
