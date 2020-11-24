@@ -46,20 +46,34 @@ EOF
 
 lsblk
 
-fdisk ${DISK} p
+if [[ $DISK == *"nvme"* ]]; then
+    # make filesystems
+    echo -e "\nCreating Filesystems...\n$HR"
 
-# make filesystems
-echo -e "\nCreating Filesystems...\n$HR"
+    mkfs.fat -F32 "${DISK}p1"
+    mkfs.ext4 "${DISK}p2"
+    mkfs.ext4 "${DISK}p3"
 
-mkfs.fat -F32 "${DISK}p1"
-mkfs.ext4 "${DISK}p2"
-mkfs.ext4 "${DISK}p3"
+    # mount target
+    mkdir /mnt
+    mount "${DISK}p2" /mnt
+    mkdir /mnt/home
+    mount "${DISK}p3" /mnt/home;
+  else
+    # make filesystems
+    echo -e "\nCreating Filesystems...\n$HR"
 
-# mount target
-mkdir /mnt
-mount "${DISK}p2" /mnt
-mkdir /mnt/home
-mount "${DISK}p3" /mnt/home
+    mkfs.fat -F32 "${DISK}1"
+    mkfs.ext4 "${DISK}2"
+    mkfs.ext4 "${DISK}3"
+
+    # mount target
+    mkdir /mnt
+    mount "${DISK}2" /mnt
+    mkdir /mnt/home
+    mount "${DISK}3" /mnt/home;
+  
+fi
 
 mkdir /mnt/etc
 genfstab -U -p /mnt >> /mnt/etc/fstab
