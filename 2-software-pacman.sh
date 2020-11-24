@@ -46,6 +46,7 @@ PKGS=(
     'kitty'
     'st'
     'alacritty'
+    'man'
 
     # DISK UTILITIES ------------------------------------------------------
 
@@ -70,7 +71,7 @@ PKGS=(
     'nautilus'              # Filesystem browser
     'remmina'               # Remote Connection
     'veracrypt'             # Disc encryption utility
-    'variety'               # Wallpaper changer
+    'nitrogen'               # Wallpaper changer
 
     # DEVELOPMENT ---------------------------------------------------------
     
@@ -83,7 +84,6 @@ PKGS=(
     'yarn'                  # Dependency management (Hyper needs this)
     'clang'                 # C Lang compiler
     'cmake'                 # Cross-platform open-source make system
-    'code'                  # Visual Studio Code
     'gcc'                   # C/C++ compiler
     'glibc'                 # C libraries
 
@@ -104,10 +104,7 @@ PKGS=(
 
     # PRODUCTIVITY --------------------------------------------------------
 
-    'hunspell'              # Spellcheck libraries
     'aspell'
-    'hunspell-en'           # English spellcheck library
-    'xpdf'                  # PDF viewer
     'chromium'
     'firefox'
 
