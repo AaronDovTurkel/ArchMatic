@@ -13,11 +13,11 @@ echo -e "\nFINAL SETUP AND CONFIGURATION"
 
 echo -e "\nGenaerating .Xresources file"
 
-# Generate the .xinitrc file so we can launch Awesome from the
-# terminal using the "startx" command
+# Generate the .Xresources and set display
 cat <<EOF > ${HOME}/.Xresources
 #!/bin/bash
 
+# Change this depending on your monitor
 Xft.dpi: 192
 
 ! These might also be useful depending on your monitor and personal preference:
@@ -98,6 +98,7 @@ cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
 cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 sed -i 's/urxvt/kitty/g' ~/.config/bspwm/bspwmrc
+sed -i 's/dmenu_run/rofi -show run/g' ~/.config/bspwm/bspwmrc
 
 # ------------------------------------------------------------------------
 
