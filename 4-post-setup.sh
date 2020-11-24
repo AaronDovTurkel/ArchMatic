@@ -68,6 +68,8 @@ mkdir ~/.config/sxhkd
 cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
 cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
+sed -i -e 's/urxvt/kitty/g' ~/.config/bspwm/bspwmrc
+
 # ------------------------------------------------------------------------
 
 echo -e "\nEnabling bluetooth daemon and setting it to auto-start"
