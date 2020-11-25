@@ -85,7 +85,7 @@ arch-chroot /mnt <<"EOT"
 pacman -S git sudo --noconfirm
 git clone https://github.com/aarondovturkel/archmatic
 chmod +x ./archmatic/0b-preinstall-chroot.sh
-./archmatic/0b-preinstall-chroot.sh
+echo "run ./archmatic/0b-preinstall-chroot.sh"
 EOT
 
 umount -a
