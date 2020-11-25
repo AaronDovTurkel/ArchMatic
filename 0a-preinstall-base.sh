@@ -88,6 +88,8 @@ chmod +x ./archmatic/0b-preinstall-chroot.sh
 echo "run ./archmatic/0b-preinstall-chroot.sh"
 EOT
 
+arch-chariot /mnt
+
 umount -a
 
 echo 'Ready to reboot!'
