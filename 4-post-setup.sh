@@ -60,6 +60,8 @@ echo -e "\nConfiguring LTS Kernel as a secondary boot option"
 
 sed '/GRUB_DEFAULT=/s/0/saved/' /etc/default/grub
 sed -i "/GRUB_SAVEDEFAULT=/s/^#//g" /etc/default/grub
+
+sudo update-grub
 # ------------------------------------------------------------------------
 
 echo -e "\nConfiguring vconsole.conf to set a larger font for login shell"
@@ -85,6 +87,19 @@ mkdir ~/images
 mkdir ~/images/wallpapers
 mkdir ~/images/screenshots
 mkdir ~/community-dots
+
+# ------------------------------------------------------------------------
+
+echo -e "\nBootstrapping my dots"
+
+cd ~;
+git clone https://github.com/aarondovturkel/dots
+ln -sf ~/dots/.vimrc ~
+ln -sf ~/dots/.bashrc ~
+ln -sf ~/dots/.config ~
+ln -sf ~/dots/.bash_profile ~
+ln -sf ~/dots/.vim ~
+
 
 # ------------------------------------------------------------------------
 
