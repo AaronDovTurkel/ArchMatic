@@ -7,6 +7,7 @@
 #  Arch Linux Post Install Setup and Config
 #-----------------------------------------------------------------------
 
+echo EFI_DISK
 read -sp "Please enter root password:" rootpassword
 read -sp "Please repeat root password:" rootpassword2
 
@@ -75,7 +76,7 @@ sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
 
 # Setting boot partition
 mkdir -p /boot/EFI
-mount /dev/nvme0n1p1 /boot/EFI
+mount ${EFI_DISK} /boot/EFI
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
 
 mkdir /boot/grub/locale
