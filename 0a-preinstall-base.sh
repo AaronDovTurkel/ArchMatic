@@ -83,11 +83,6 @@ pacstrap -i /mnt base
 
 arch-chroot /mnt <<"EOT"
 pacman -S git sudo --noconfirm
-if [[ $DISK == *"nvme"* ]]; then
-  EFI_DISK=/dev/nvme0n1p1
-  else
-    EFI_DISK=/dev/sda1
-fi
 git clone https://github.com/aarondovturkel/archmatic
 chmod +x ./archmatic/0b-preinstall-chroot.sh
 echo "run ./archmatic/0b-preinstall-chroot.sh"
