@@ -7,9 +7,10 @@
 #  Arch Linux Post Install Setup and Config
 #-----------------------------------------------------------------------
 
-echo EFI_DISK
+
+
 read -sp "Please enter root password:" rootpassword
-read -sp "Please repeat root password:" rootpassword2
+read -sp "\nPlease repeat root password:" rootpassword2
 
 # Check both passwords match
 if [ "$rootpassword" != "$rootpassword2" ]; then
@@ -17,15 +18,25 @@ if [ "$rootpassword" != "$rootpassword2" ]; then
     exit 1
 fi
 
-read -p "Please enter username:" username
-read -sp "Please enter password:" password
-read -sp "Please repeat password:" password2
+read -p "\nPlease enter username:" username
+read -sp "\nPlease enter password:" password
+read -sp "\nPlease repeat password:" password2
 
 # Check both passwords match
 if [ "$password" != "$password2" ]; then
     echo "Passwords do not match, try running the script again"
     exit 1
 fi
+
+echo "-------------------------------------------------"
+echo "------- Please select your EFI disk -------------"
+echo "-------------------------------------------------"
+lsblk
+echo "Please enter EFI disk: (example /dev/sda1 or /dev/nvme0n1p1 or /dev/vda1)"
+read EFI_DISK
+echo "--------------------------------------"
+echo -e "\nEFI disk selected...\n$HR"
+echo "--------------------------------------"
 
 pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
 echo -e "\nInstalling Base System\n"
@@ -66,11 +77,11 @@ sed -i "/en_US.UTF-8/s/^#//g" /etc/locale.gen
 locale-gen
 
 # Setting root password
-echo $rootpassword | passwd –-stdin
+echo root:$rootpassword | chpasswd
 
 # creating user and setting password
 useradd -m -g users -G wheel $username
-echo $password | passwd –-stdin $username
+echo $username:$password | chpasswd
 
 sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
 
