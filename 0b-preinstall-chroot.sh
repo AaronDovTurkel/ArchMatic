@@ -59,7 +59,8 @@ PKGS=(
   'intel-ucode'
   'xorg-server'
   'mesa'
-  'xf86-video-intel'
+  'virtualbox-guest-utils'
+  'xf86-video-vmware'
 )
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
