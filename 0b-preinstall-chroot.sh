@@ -10,7 +10,9 @@
 
 
 read -sp "Please enter root password:" rootpassword
-read -sp "\nPlease repeat root password:" rootpassword2
+printf "\n"
+read -sp "Please repeat root password:" rootpassword2
+printf "\n"
 
 # Check both passwords match
 if [ "$rootpassword" != "$rootpassword2" ]; then
@@ -19,8 +21,11 @@ if [ "$rootpassword" != "$rootpassword2" ]; then
 fi
 
 read -p "\nPlease enter username:" username
+printf "\n"
 read -sp "\nPlease enter password:" password
+printf "\n"
 read -sp "\nPlease repeat password:" password2
+printf "\n"
 
 # Check both passwords match
 if [ "$password" != "$password2" ]; then
