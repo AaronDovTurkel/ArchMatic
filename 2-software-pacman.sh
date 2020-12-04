@@ -17,9 +17,7 @@ PKGS=(
     'cronie'                # cron jobs
     'curl'                  # Remote content retrieval
     'file-roller'           # Archive utility
-    'gtop'                  # System monitoring via terminal
     'gufw'                  # Firewall manager
-    'hardinfo'              # Hardware info app
     'htop'                  # Process viewer
     'neofetch'              # Shows system info when you launch terminal
     'ntp'                   # Network Time Protocol to set time via network.
@@ -32,7 +30,6 @@ PKGS=(
     'unrar'                 # RAR compression program
     'unzip'                 # Zip compression program
     'wget'                  # Remote content retrieval
-    'terminator'            # Terminal emulator
     'vim'                   # Terminal Editor
     'zenity'                # Display graphical dialog boxes via shell scripts
     'zip'                   # Zip compression program
@@ -47,6 +44,7 @@ PKGS=(
     'st'
     'alacritty'
     'man'
+    'docker'
 
     # DISK UTILITIES ------------------------------------------------------
 
@@ -88,8 +86,7 @@ PKGS=(
     'glibc'                 # C libraries
 
     # MEDIA ---------------------------------------------------------------
-
-    'kdenlive'              # Movie Render
+    
     'obs-studio'            # Record your screen
     'vlc'                   # Video player
     
