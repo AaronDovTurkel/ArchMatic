@@ -27,8 +27,6 @@ PKGS=(
     # MEDIA ---------------------------------------------------------------
 
     'screenkey'                 # Screencast your keypresses
-    'browsh-bin'                # Terminal based browser
-    
 
     # THEMES --------------------------------------------------------------
 
