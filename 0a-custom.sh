@@ -44,37 +44,6 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DISK}
   q # and we're done
 EOF
 
-
-echo "-------------------------------------------------"
-echo "-------select your ssd disk to format----------------"
-echo "-------------------------------------------------"
-lsblk
-echo "Please enter disk: (example /dev/sda)"
-read SSD_DISK
-echo "--------------------------------------"
-echo -e "\nFormatting disk...\n$HR"
-echo "--------------------------------------"
-
-HALF_SIZE=echo $(( $(sudo blockdev --getsize /dev/xvdf) / 2))
-echo $HALF_SIZE
-
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${SSD_DISK}
-  o # clear the in memory partition table
-  n # new partition
-  p # primary partition
-  1 # partition number 1
-    # default - start at beginning of disk 
-  +${HALF_SIZE} # 100 MB boot parttion
-  n # new partition
-  p # primary partition
-  2
-  
-    # default, extend partition to end of disk
-  w # write the partition table
-  q # and we're done
-EOF
-
-
 if [[ $DISK == *"nvme"* ]]; then
     # make filesystems
     echo -e "\nCreating Filesystems...\n$HR"
@@ -104,10 +73,22 @@ if [[ $DISK == *"nvme"* ]]; then
 fi
 
 # make filesystems
-echo -e "\nCreating Filesystems...\n$HR"
+echo "-------------------------------------------------"
+echo "-------select your ssd disk to format----------------"
+echo "-------------------------------------------------"
+lsblk
+echo "Please enter disk: (example /dev/sda)"
+read SSD_DISK
+echo "--------------------------------------"
+echo -e "\nFormatting disk...\n$HR"
+echo "--------------------------------------"
 
-mkfs.ext4 "${SSD_DISK}1"
-mkfs.ext4 "${SSD_DISK}2"
+mkfs.ext4 "${SSD_DISK}"
+
+mkdir -p /mnt/virt/docker
+mkdir /mnt/virt/vm
+
+mount "${SSD_DISK}" /mnt/virt
     
 
 mkdir /mnt/etc
