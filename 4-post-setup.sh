@@ -18,7 +18,7 @@ cat <<EOF > ${HOME}/.Xresources
 #!/bin/bash
 
 # Change this depending on your monitor
-Xft.dpi: 192
+# Xft.dpi: 192 # uncomment if you have a 13" screen
 
 ! These might also be useful depending on your monitor and personal preference:
 Xft.autohint: 0
@@ -76,8 +76,8 @@ EOF
 echo -e "\nEnabling Login Display Manager"
 
 sudo systemctl enable lightdm.service
-sed -i "/greeter-session=/s/^#//g" /etc/lightdm/lightdm.conf
-sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightdm/lightdm.conf
+sudo sed -i "/greeter-session=/s/^#//g" /etc/lightdm/lightdm.conf
+sudo sed '/greeter-session=/s/example-gtk-gnome/lightdm-webkit2-greeter/' /etc/lightdm/lightdm.conf
 
 # ------------------------------------------------------------------------
 
@@ -106,11 +106,11 @@ mkdir ~/.config
 mkdir ~/.config/bspwm
 mkdir ~/.config/sxhkd
 
-cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
-cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
+sudo cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+sudo cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
-sed -i 's/urxvt/kitty/g' ~/.config/bspwm/bspwmrc
-sed -i 's/dmenu_run/rofi -show run/g' ~/.config/bspwm/bspwmrc
+sudo sed -i 's/urxvt/kitty/g' ~/.config/bspwm/bspwmrc
+sudo sed -i 's/dmenu_run/rofi -show run/g' ~/.config/bspwm/bspwmrc
 
 # ------------------------------------------------------------------------
 
