@@ -22,9 +22,9 @@ fi
 
 read -p "\nPlease enter username:" username
 printf "\n"
-read -sp "\nPlease enter password:" password
+read -sp "Please enter password:" password
 printf "\n"
-read -sp "\nPlease repeat password:" password2
+read -sp "Please repeat password:" password2
 printf "\n"
 
 # Check both passwords match
