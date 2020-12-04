@@ -92,13 +92,10 @@ mkdir ~/community-dots
 
 echo -e "\nBootstrapping my dots"
 
-cd ~;
+cd
 git clone https://github.com/aarondovturkel/dots
-ln -sf ~/dots/.vimrc ~
 ln -sf ~/dots/.bashrc ~
-ln -sf ~/dots/.config ~
 ln -sf ~/dots/.bash_profile ~
-ln -sf ~/dots/.vim ~
 
 
 # ------------------------------------------------------------------------
