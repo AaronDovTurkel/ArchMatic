@@ -89,6 +89,22 @@ mkdir -p /mnt/virt/docker
 mkdir /mnt/virt/vm
 
 mount "${SSD_DISK}" /mnt/virt
+
+# make filesystems
+echo "-------------------------------------------------"
+echo "-------select your share disk to format----------------"
+echo "-------------------------------------------------"
+lsblk
+echo "Please enter disk: (example /dev/sda)"
+read SHARE_DISK
+echo "--------------------------------------"
+echo -e "\nFormatting disk...\n$HR"
+echo "--------------------------------------"
+
+mkfs.ext4 "${SHARE_DISK}"
+
+mkdir /mnt/share
+mount "${SHARE_DISK}" /mnt/share
     
 
 mkdir /mnt/etc
