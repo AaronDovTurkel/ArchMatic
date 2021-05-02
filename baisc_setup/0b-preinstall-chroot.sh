@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pulls
-Issues
-Marketplace
-Explore
- 
-@AaronDovTurkel 
-AaronDovTurkel
-/
-ArchMatic
-forked from ChrisTitusTech/ArchMatic
-0
-3109
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-More
-ArchMatic/0b-preinstall-chroot.sh
-@AaronDovTurkel
-AaronDovTurkel Update 0b-preinstall-chroot.sh
-Latest commit 608f63d on Dec 3, 2020
- History
- 1 contributor
-112 lines (93 sloc)  2.77 KB
- 
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
 #      _          _    __  __      _   _
@@ -58,6 +27,9 @@ printf "\n"
 read -sp "Please repeat password:" password2
 printf "\n"
 
+read -p "\nPlease enter host name:" hostname
+printf "\n"
+
 # Check both passwords match
 if [ "$password" != "$password2" ]; then
     echo "Passwords do not match, try running the script again"
@@ -74,7 +46,7 @@ echo "--------------------------------------"
 echo -e "\nEFI disk selected...\n$HR"
 echo "--------------------------------------"
 
-pacman -S linux linux-headers linux-lts linux-lts-headers linux-firmware --noconfirm --needed
+pacman -S linux linux-headers linux-firmware --noconfirm --needed
 echo -e "\nInstalling Base System\n"
 PKGS=(
   'nano'
@@ -95,8 +67,6 @@ PKGS=(
   'intel-ucode'
   'xorg-server'
   'mesa'
-  'virtualbox-guest-utils'
-  'xf86-video-vmware'
 )
 for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
@@ -108,7 +78,6 @@ systemctl enable sshd
 systemctl enable NetworkManager
 
 mkinitcpio -p linux
-mkinitcpio -p linux-lts
 
 sed -i "/en_US.UTF-8/s/^#//g" /etc/locale.gen
 locale-gen
@@ -132,7 +101,7 @@ cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Creating swapfile
-fallocate -l 2G /swapfile
+dd if=/dev/zero of=/swapfile bs=1M count=2048 status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 
@@ -140,17 +109,26 @@ cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 cat /etc/fstab
 
+#Post install tweeks 
+timedatectl set-timezone America/New_York
+systemctl enable systemd-timesyncd
+
+hostnamectl set-hostname $hostname
+
+echo "127.0.1.1 ${hostname}" >> /etc/hosts
+
+# ------------------------------------------------------------------------
+
+echo -e "\nEnabling bluetooth daemon and setting it to auto-start"
+
+sudo sed -i 's|#AutoEnable=false|AutoEnable=true|g' /etc/bluetooth/main.conf
+sudo systemctl enable --now bluetooth.service
+
+# Desktop Env
+
+sudo pacman -S gnome
+sudo pacman -S gnome-tweaks
+sudo systemctl enable gdm
+
+
 echo "exit chroot by running 'exit' now"
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
