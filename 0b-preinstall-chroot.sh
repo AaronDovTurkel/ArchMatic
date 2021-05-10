@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pulls
-Issues
-Marketplace
-Explore
- 
-@AaronDovTurkel 
-AaronDovTurkel
-/
-ArchMatic
-forked from ChrisTitusTech/ArchMatic
-0
-3109
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-More
-ArchMatic/0b-preinstall-chroot.sh
-@AaronDovTurkel
-AaronDovTurkel Update 0b-preinstall-chroot.sh
-Latest commit 608f63d on Dec 3, 2020
- History
- 1 contributor
-112 lines (93 sloc)  2.77 KB
- 
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
 #      _          _    __  __      _   _
@@ -141,16 +110,3 @@ echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 cat /etc/fstab
 
 echo "exit chroot by running 'exit' now"
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
